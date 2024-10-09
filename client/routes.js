@@ -4,7 +4,7 @@ import axios from 'axios'
 
 const keycloakConfig = {
     clientId: 'nodeclient',
-    redirectUri: 'http://localhost:5000/callback',
+    redirectUri: 'http://localhost:5173/callback',
     realm: 'keycloak-realm',
     keycloakBaseUrl: 'http://localhost:7080',
     scope: 'openid profile email',
@@ -18,7 +18,7 @@ const authorizationUrl = `${keycloakConfig.keycloakBaseUrl}/realms/${keycloakCon
     `response_type=code&` +
     `redirect_uri=${encodeURIComponent(keycloakConfig.redirectUri)}&`
 
-res.redirect(authorizationUrl);
+res.send(authorizationUrl);
 });
 
 router.get('/callback', async (req, res) => {
