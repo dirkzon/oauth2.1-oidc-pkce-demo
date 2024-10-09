@@ -50,7 +50,7 @@ router.get('/profile', async (req, res, next) => {
 
   await axios.get(userInfoEndpoint, {
     headers: {
-      Authorization: `Bearer ${accessToken}`, // Attach the access token
+      Authorization: `Bearer ${accessToken}`,
     },
   }).then((response) => {
     console.log(response.data)
