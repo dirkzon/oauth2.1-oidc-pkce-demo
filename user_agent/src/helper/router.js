@@ -29,7 +29,7 @@ router.beforeEach(async (to) => {
     const authRequired = !publicPages.includes(to.path);
     const authStore = useAuthStore();
 
-    if (authRequired && !authStore.user) {
+    if (authRequired && !authStore.auth) {
         authStore.login()
     }
 });

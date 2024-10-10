@@ -23,12 +23,12 @@ function request(method) {
         return fetch(url, requestOptions).then(handleResponse);
     }
 }
+
 function authHeader(url) {
-    const { user } = useAuthStore();
-    const isLoggedIn = !!user?.jwtToken;
-    const isApiUrl = url.startsWith(import.meta.env.VITE_API_URL);
-    if (isLoggedIn && isApiUrl) {
-        return { Authorization: `Bearer ${user.jwtToken}` };
+    const { auth } = useAuthStore();
+    const isLoggedIn = !!auth?.accessToken;
+    if (isLoggedIn) {
+        return { Authorization: `Bearer ${auth.accessToken}` };
     } else {
         return {};
     }
@@ -39,8 +39,8 @@ function handleResponse(response) {
         const data = text && JSON.parse(text);
         
         if (!response.ok) {
-            const { user, logout } = useAuthStore();
-            if ([401, 403].includes(response.status) && user) {
+            const { auth, logout } = useAuthStore();
+            if ([401, 403].includes(response.status) && auth) {
                 logout();
             }
             const error = (data && data.message) || response.statusText;

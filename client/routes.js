@@ -21,7 +21,6 @@ router.get('/login', (_, res) => {
   res.send({data: authorizationUrl});
 });
 
-
 router.post('/connect', (req, res, next) => {
   const tokenEndpoint = `${keycloakConfig.keycloakBaseUrl}/realms/${keycloakConfig.realm}/protocol/openid-connect/token`;
   
@@ -37,20 +36,18 @@ router.post('/connect', (req, res, next) => {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
   }).then((response) => {
-    res.send(response.data)
+    res.send({data: response.data})
   }).catch(next)
 })
 
 router.get('/profile', async (req, res, next) => {
   const userInfoEndpoint = `${keycloakConfig.keycloakBaseUrl}/realms/${keycloakConfig.realm}/protocol/openid-connect/userinfo`;
-
   await axios.get(userInfoEndpoint, {
     headers: {
-      Authorization: `Bearer `,
+      Authorization: req.headers.authorization,
     },
   }).then((response) => {
-    console.log(response.data)
-    res.send(response.data)
+    res.send({data: response.data})
   });
 })
 
