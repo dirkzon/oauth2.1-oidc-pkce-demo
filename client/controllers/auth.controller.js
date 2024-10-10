@@ -1,7 +1,7 @@
-import { generateAuthorizationUrl, getToken } from "../services/index.js";
+import { generateAuthorizationUri, getToken, deleteSession } from "../services/index.js";
 
 export const login = (_, res) => {
-    const authorizationUrl = generateAuthorizationUrl();
+    const authorizationUrl = generateAuthorizationUri();
     res.send({ data: authorizationUrl });
 }
 
@@ -11,7 +11,16 @@ export const connect = async (req, res, next) => {
     }).catch((error) => next(error));
 }
 
+export const logout = async (req, res, send) => {
+    return await deleteSession(req.headers.authorization, req.headers.refresh_token).then(() => {
+        res.send()
+    }).catch((error) => {
+        send(error)
+    });
+}
+
 export default {
     login,
-    connect
+    connect,
+    logout
 }

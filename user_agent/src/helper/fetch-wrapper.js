@@ -8,7 +8,7 @@ export const fetchWrapper = {
 };
 
 function request(method) {
-    return (url, body, { credentials } = {}) => {
+    return (url, body, headers) => {
         const requestOptions = {
             method,
             headers: authHeader(url)
@@ -17,8 +17,10 @@ function request(method) {
             requestOptions.headers['Content-Type'] = 'application/json';
             requestOptions.body = JSON.stringify(body);
         }
-        if (credentials) {
-            requestOptions.credentials = credentials;
+        if (headers) {
+            for (let key in headers) {
+                requestOptions.headers[key] = headers[key]
+            }
         }
         return fetch(url, requestOptions).then(handleResponse);
     }

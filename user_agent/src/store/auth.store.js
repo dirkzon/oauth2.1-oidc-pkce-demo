@@ -10,9 +10,15 @@ export const useAuthStore = defineStore({
     }),
     actions: {
         async login() {
-            const response = await fetchWrapper.get(`${baseUrl}/login`);
-            const redirectUrl = response.data;
-            window.location.href = redirectUrl;
+            fetchWrapper.get(`${baseUrl}/login`).then((response) => {
+                const loginUri = response.data;
+                window.location.href = loginUri;
+            }).catch((error) => console.log(error));
+        },
+        async logout() {
+            fetchWrapper.post(`${baseUrl}/logout`, {}, {refresh_token: this.auth.refreshToken}).then(() => {
+                router.push('/')
+            }).catch((error) => console.log(error));
         },
         async connect(code) {
             fetchWrapper.post(`${baseUrl}/connect`, { code: code }).then((response) => {
@@ -22,7 +28,7 @@ export const useAuthStore = defineStore({
                     refreshToken: refresh_token
                 }
                 router.push("profile")
-            });
+            }).catch((error) => console.log(error))
         }
     },
 });

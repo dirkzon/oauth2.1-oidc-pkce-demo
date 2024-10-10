@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const generateAuthorizationUrl = () => {
+export const generateAuthorizationUri = () => {
     return `${process.env.KEYCLOAK_BASE_URL}/realms/${process.env.REALM}/protocol/openid-connect/auth?` +
         `client_id=${process.env.CLIENT_ID}&` +
         `response_type=code&` +
@@ -20,7 +20,7 @@ export const getToken = (code) => {
 
     return axios.post(tokenEndpoint, params.toString(), {
         headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/x-www-form-urlencoded',
         },
     }).then((response) => {
         return response.data
@@ -29,7 +29,27 @@ export const getToken = (code) => {
     });
 }
 
+export const deleteSession = (access_token, refresh_token) => {
+    return axios.post(`${process.env.KEYCLOAK_BASE_URL}/realms/${process.env.REALM}/protocol/openid-connect/logout`, {
+        client_id: process.env.CLIENT_ID,
+        client_secret: process.env.CLIENT_SECRET,
+        refresh_token: refresh_token
+    }, 
+    {
+        headers: {
+            Authorization: access_token,
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    }).then((response) => {
+        return response.data
+    }).catch((error) => {
+        console.log(error)
+    })
+
+}
+
 export default {
-    generateAuthorizationUrl,
+    generateAuthorizationUri,
     getToken,
+    deleteSession
 }
