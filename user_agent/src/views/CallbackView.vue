@@ -1,21 +1,17 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
-import axios from "axios"
+import { onMounted } from 'vue';
+import { useAuthStore } from "@/store"
 
 const { session_state, iss, code } = useRoute().query
+const authStore = useAuthStore();
+const router = useRouter()
 
-const initialize = async () => {
-  const router = useRouter();
-  axios.post('http://localhost:5000/connect', {
-      code: code
-  }).then(() => {
-    router.push('profile')
-  }).catch(() => {
-    router.back()
-  })
-}
+onMounted(async () => {
+  await authStore.connect(code)
+  router.push("profile")
+})
 
-initialize()
 </script>
 
 <template>

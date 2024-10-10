@@ -2,8 +2,6 @@ import express from 'express';
 const router = express.Router();
 import axios from 'axios'
 
-var accessToken = ""
-
 const keycloakConfig = {
     clientId: 'nodeclient',
     redirectUri: 'http://localhost:5173/callback',
@@ -20,7 +18,7 @@ router.get('/login', (_, res) => {
       `redirect_uri=${encodeURIComponent(keycloakConfig.redirectUri)}&` +
       `scope=${keycloakConfig.scope}`
 
-  res.send(authorizationUrl);
+  res.send({data: authorizationUrl});
 });
 
 
@@ -39,9 +37,7 @@ router.post('/connect', (req, res, next) => {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
   }).then((response) => {
-    const { access_token, refresh_token, expires_in } = response.data
-    accessToken = access_token
-    res.send()
+    res.send(response.data)
   }).catch(next)
 })
 
@@ -50,7 +46,7 @@ router.get('/profile', async (req, res, next) => {
 
   await axios.get(userInfoEndpoint, {
     headers: {
-      Authorization: `Bearer ${accessToken}`,
+      Authorization: `Bearer `,
     },
   }).then((response) => {
     console.log(response.data)

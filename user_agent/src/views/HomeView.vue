@@ -1,9 +1,11 @@
 <script setup>
-import axios from "axios"
+import { useAuthStore } from "@/store"
+
+const authStore = useAuthStore();
 
 async function test() {
-  var response = await axios.get('http://localhost:5000/login')
-  window.location.href = response.data
+  await authStore.login()
+  // window.location.href = authStore.getRedirectUrl
 }
 </script>
 
