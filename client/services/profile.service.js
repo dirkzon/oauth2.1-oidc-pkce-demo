@@ -7,7 +7,9 @@ export const getProfileFromToken = (token) => {
         Authorization: token,
       },
     }).then((response) => {
-      return response.data
+        return response.data;
+    }).catch((error) => {
+        throw new Error(error);
     });
 }
 

@@ -1,13 +1,14 @@
 import { generateAuthorizationUrl, getToken } from "../services/index.js";
 
-export const login = () => {
+export const login = (_, res) => {
     const authorizationUrl = generateAuthorizationUrl();
-    return authorizationUrl;
+    res.send({ data: authorizationUrl });
 }
 
-export const connect = async (code) => {
-    const token = await getToken(code)
-    return token
+export const connect = async (req, res, next) => {
+    return await getToken(req.body.code).then((response) => {
+        res.send(response)
+    }).catch((error) => next(error));
 }
 
 export default {

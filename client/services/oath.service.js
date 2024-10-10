@@ -24,7 +24,9 @@ export const getToken = (code) => {
         },
     }).then((response) => {
         return response.data
-    })
+    }).catch((error) => {
+        throw new Error(error);
+    });
 }
 
 export default {

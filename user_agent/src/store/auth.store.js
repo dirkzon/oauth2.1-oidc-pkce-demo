@@ -15,13 +15,14 @@ export const useAuthStore = defineStore({
             window.location.href = redirectUrl;
         },
         async connect(code) {
-            const response = await fetchWrapper.post(`${baseUrl}/connect`, { code: code })
-            const { access_token, refresh_token, _ } = response.data
-            this.auth = {
-                accessToken: access_token,
-                refreshToken: refresh_token
-            }
-            router.push("profile")
+            fetchWrapper.post(`${baseUrl}/connect`, { code: code }).then((response) => {
+                const { access_token, refresh_token, _ } = response
+                this.auth = {
+                    accessToken: access_token,
+                    refreshToken: refresh_token
+                }
+                router.push("profile")
+            });
         }
     },
 });

@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { fetchWrapper, router } from '@/helper';
+import { fetchWrapper } from '@/helper';
 
 const baseUrl = "http://localhost:5000"
 
@@ -10,7 +10,7 @@ export const useProfileStore = defineStore({
     }),
     actions: {
         async fetchProfile() {
-            this.profile = await fetchWrapper.get(`${baseUrl}/profile`)
+            await fetchWrapper.get(`${baseUrl}/profile`).then((response) => this.profile = response).catch((error) => console.log(error))
         }
     },
 });

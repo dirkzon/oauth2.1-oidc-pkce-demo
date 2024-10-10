@@ -39,13 +39,13 @@ function handleResponse(response) {
         const data = text && JSON.parse(text);
         
         if (!response.ok) {
-            const { auth, logout } = useAuthStore();
-            if ([401, 403].includes(response.status) && auth) {
-                logout();
+            const { login, auth } = useAuthStore();
+            if ([401, 403].includes(response.status) && !auth) {
+                login();
             }
             const error = (data && data.message) || response.statusText;
             return Promise.reject(error);
         }
         return data;
     });
-}    
+}

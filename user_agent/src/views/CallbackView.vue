@@ -5,11 +5,9 @@ import { useAuthStore } from "@/store"
 
 const { session_state, iss, code } = useRoute().query
 const authStore = useAuthStore();
-const router = useRouter()
 
 onMounted(async () => {
   await authStore.connect(code)
-  router.push("profile")
 })
 
 </script>

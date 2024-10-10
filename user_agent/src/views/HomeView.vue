@@ -5,7 +5,6 @@ const authStore = useAuthStore();
 
 async function test() {
   await authStore.login()
-  // window.location.href = authStore.getRedirectUrl
 }
 </script>
 
