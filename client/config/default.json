@@ -1,0 +1,8 @@
+{
+    "clientId": "nodeclient",
+    "redirectUri": "http://localhost:5173/callback",
+    "realm": "keycloak-realm",
+    "keycloakBaseUrl": "http://localhost:7080",
+    "scope": "openid profile email",
+    "clientSecret": "3XEXXvKpvegvpxNL5ee0JQ8PdUXop5PY"
+}
