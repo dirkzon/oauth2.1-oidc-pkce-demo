@@ -2,7 +2,7 @@ import { getProfileFromToken } from "../services/index.js";
 
 export const getProfile = async (req, res, next) => {
     if (!req.headers.authorization) {
-        res.status(401).json({
+        return res.status(401).json({
             status: 401,
             message: 'No token provided. Authorization required.',
         });

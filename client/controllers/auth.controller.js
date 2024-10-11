@@ -1,12 +1,12 @@
 import { generateAuthorizationUri, getToken, deleteSession } from "../services/index.js";
 
-export const login = (_, res) => {
-    const authorizationUrl = generateAuthorizationUri();
+export const login = (req, res) => {
+    const authorizationUrl = generateAuthorizationUri(req.body.code_challenge);
     res.send({ data: authorizationUrl });
 }
 
 export const connect = async (req, res, next) => {
-    return await getToken(req.body.code).then((response) => {
+    return await getToken(req.body.code, req.body.code_verifier).then((response) => {
         res.send(response)
     }).catch((error) => next(error));
 }
