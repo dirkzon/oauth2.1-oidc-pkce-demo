@@ -16,7 +16,7 @@ export const useAuthStore = defineStore({
             this.codeVerifier = this.generateCodeVerifier()
             this.generateCodeChallenge(this.codeVerifier).then((codeChallenge) => {
                 this.codeChallenge = codeChallenge
-                fetchWrapper.post(`${baseUrl}/login`, {code_challenge: this.codeChallenge}).then((response) => {
+                fetchWrapper.get(`${baseUrl}/login?code_challenge=${this.codeChallenge}`).then((response) => {
                     const loginUri = response.data;
                     window.location.href = loginUri;
                 }).catch((error) => console.log(error));
@@ -24,6 +24,9 @@ export const useAuthStore = defineStore({
         },
         async logout() {
             fetchWrapper.post(`${baseUrl}/logout`, {}, {refresh_token: this.auth.refreshToken}).then(() => {
+                this.auth = null;
+                this.codeChallenge = "";
+                this.codeVerifier = "";
                 router.push('/')
             }).catch((error) => console.log(error));
         },
@@ -38,7 +41,10 @@ export const useAuthStore = defineStore({
                     refreshToken: refresh_token
                 }
                 router.push("profile")
-            }).catch((error) => console.log(error)) 
+            }).catch((error) => {
+                console.log(error)
+                this.login()
+            }) 
         },
         generateCodeVerifier(length = 40) {
             const array = new Uint32Array(length);

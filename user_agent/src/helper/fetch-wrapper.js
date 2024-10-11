@@ -42,7 +42,7 @@ function handleResponse(response) {
         
         if (!response.ok) {
             const { login, auth } = useAuthStore();
-            if ([401, 403].includes(response.status) && !auth) {
+            if ([401, 403, 400].includes(response.status) && !auth) {
                 login();
             }
             const error = (data && data.message) || response.statusText;

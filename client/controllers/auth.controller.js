@@ -1,7 +1,7 @@
 import { generateAuthorizationUri, getToken, deleteSession } from "../services/index.js";
 
 export const login = (req, res) => {
-    const authorizationUrl = generateAuthorizationUri(req.body.code_challenge);
+    const authorizationUrl = generateAuthorizationUri(req.query.code_challenge);
     res.send({ data: authorizationUrl });
 }
 
