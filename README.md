@@ -1,8 +1,6 @@
-# Oauth2.1 PKCE demo
+# Oauth2.1 OIDC PKCE demo
 
-This repository demonstrates the [OAuth 2.1 Authorization Framework](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-11) with Proof Key for Code Exchange (PKCE). It includes a user agent, authorization server and client to securely authenticate users, and manage JWT access tokens.
-
-**TODO: add sequence diagram of 
+This repository demonstrates the [OAuth 2.1 Authorization Framework](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-11) with [Proof Key for Code Exchange](https://datatracker.ietf.org/doc/html/rfc7636) (PKCE), [OpenId Connect](openid.net) (OIDC) and the EdDSA digital signature algorithm. It includes a user agent, authorization server and client to securely authenticate users, and manage JWT access tokens.
 
 ## Built with
 - **Client:** [Express.js](expressjs.com)
@@ -40,7 +38,7 @@ This project is built on [Node.Js](nodejs.org) with javascript. This sections ex
 
    docker-compose up
 ```
-_A keycloak container should now be created in Docker Desktop. No furter configuration is needed due to the config file which populates the keycloak with a realm, client and users._
+_A keycloak container should now be created in Docker Desktop. The [config file](./auth_server/realm-config.json) populates this keycloak instance with a realm, client and users._
 !['docker desktop keycloak container'](./examples/keycloak_container.PNG)
 
 3. Start the client
@@ -60,3 +58,7 @@ _A keycloak container should now be created in Docker Desktop. No furter configu
 5. navigate to [http://localhost:5173/](http://localhost:5173/)
 
 **TODO add user agent homepage image**
+
+## How it works
+
+![](/examples/Oath_sequence_diagram.PNG)
