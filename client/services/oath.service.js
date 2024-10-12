@@ -12,7 +12,7 @@ export const generateAuthorizationUri = (code_challenge) => {
 
 export const getToken = (code, code_verifier) => {
     const tokenEndpoint = `${process.env.KEYCLOAK_BASE_URL}/realms/${process.env.REALM}/protocol/openid-connect/token`;
-    
+
     const params = new URLSearchParams();
     params.append('client_id', process.env.CLIENT_ID);
     params.append('client_secret', process.env.CLIENT_SECRET); 
@@ -50,8 +50,16 @@ export const deleteSession = (access_token, refresh_token) => {
         console.log(error)
     });
 }
+
+export const fetchKeycloakJWKSet = async () => {
+    return axios.get(`${process.env.KEYCLOAK_BASE_URL}/realms/${process.env.REALM}/protocol/openid-connect/certs`).then((response) => {
+        return response.data
+    });
+}
+
 export default {
     generateAuthorizationUri,
     getToken,
     deleteSession,
+    fetchKeycloakJWKSet,
 }
