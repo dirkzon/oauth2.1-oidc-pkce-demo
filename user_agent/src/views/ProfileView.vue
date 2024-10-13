@@ -1,18 +1,20 @@
 <script setup>
-import { onMounted } from 'vue'
-import { useProfileStore } from '@/store/profile.store';
-import { useAuthStore } from '@/store';
+import { useAuthStore, useProfileStore } from '@/store';
+import { router } from '@/helper';
 
-const profileStore = useProfileStore()
-const authStore = useAuthStore()
-
-onMounted(async () => {
-  await profileStore.fetchProfile()
-});
+const authStore = useAuthStore();
+const profileStore = useProfileStore();
 </script>
 
 <template>
-  <h1> Profile info </h1>
-  <h3> {{ profileStore.profile }} </h3>
-  <button @click="authStore.logout()"> log out </button>
+    <div class="content">
+      <h1 class="text"> Profile info</h1>
+      <div style="text-align: start;">
+        <p class="text"> Username: {{ profileStore.name }}</p>
+        <p class="text"> email: {{ profileStore.email }} </p>
+        <p class="text"> email verified: {{ profileStore.email_verified }}</p>
+        <p class="text"> id: {{ profileStore.id }}</p>
+      </div>
+      <button  class="btn" @click="authStore.logout()"> log out </button>
+    </div>
 </template>

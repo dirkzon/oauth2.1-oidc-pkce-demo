@@ -1,16 +1,22 @@
 import { defineStore } from 'pinia';
-import { fetchWrapper } from '@/helper';
-
-const baseUrl = "http://localhost:5000"
+import {jwtDecode}  from 'jwt-decode';
+import { useLocalStorage } from "@vueuse/core"
 
 export const useProfileStore = defineStore({
     id: 'profile',
     state: () => ({
-        profile: null
+        name: useLocalStorage('name', ""),
+        email: useLocalStorage('email', ""),
+        email_verified: useLocalStorage('emailverified', false),
+        id: useLocalStorage('id', ""), 
     }),
     actions: {
-        async fetchProfile() {
-            await fetchWrapper.get(`${baseUrl}/profile`).then((response) => this.profile = response).catch((error) => console.log(error))
-        }
+        getUserFromJWT(jwt) {
+            const decodedToken = jwtDecode(jwt)
+            this.name = decodedToken.name;
+            this.email = decodedToken.email;
+            this.email_verified = decodedToken.email_verified;
+            this.id = decodedToken.sub;
+        },
     },
 });

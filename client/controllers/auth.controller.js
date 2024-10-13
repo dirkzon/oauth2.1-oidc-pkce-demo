@@ -13,7 +13,9 @@ export const connect = async (req, res, next) => {
         }).catch((error) => {
             throw new Error(error)
         })
-    }).catch((error) => next(error));
+    }).catch((error) => {
+        next(error)
+    });
 }
 
 export const logout = async (req, res, send) => {

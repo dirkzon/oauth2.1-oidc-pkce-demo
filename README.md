@@ -98,8 +98,3 @@ The client requests an access token from the authorization server's token endpoi
 The authorization server authenticates the client when possible, validates the authorization code, validates the code verifier, and ensures that the redirect URI received matches the URI used to redirect the client in step (3). If valid, the authorization server responds back with an access token and, optionally, a refresh token.
 
 ![authorization code flow step 4 & 5](./examples/AuthFlow_step4-5.drawio.png)
-
-### 6. User Info Retrieval (optional)
-Although not necessary for the authorization code flow, this step is included for completeness. Once authenticated, the user agent redirects to the 'profile' page, where a call is made to the client with the access token in the headers. The client then retrieves the user info from the resource server using the same token.
-
-![user info retrieval](/examples/AuthFlow_step6.drawio.png)

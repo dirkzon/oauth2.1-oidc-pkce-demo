@@ -11,7 +11,7 @@ function request(method) {
     return (url, body, headers) => {
         const requestOptions = {
             method,
-            headers: authHeader(url)
+            headers: authHeader()
         };
         if (body) {
             requestOptions.headers['Content-Type'] = 'application/json';
@@ -26,11 +26,11 @@ function request(method) {
     }
 }
 
-function authHeader(url) {
-    const { auth } = useAuthStore();
-    const isLoggedIn = !!auth?.accessToken;
+function authHeader() {
+    const { accessToken } = useAuthStore();
+    const isLoggedIn = !!accessToken;
     if (isLoggedIn) {
-        return { Authorization: `Bearer ${auth.accessToken}` };
+        return { Authorization: `Bearer ${accessToken}` };
     } else {
         return {};
     }
@@ -39,10 +39,9 @@ function authHeader(url) {
 function handleResponse(response) {
     return response.text().then(text => {
         const data = text && JSON.parse(text);
-        
         if (!response.ok) {
-            const { login, auth } = useAuthStore();
-            if ([401, 403, 400].includes(response.status) && !auth) {
+            const { login, accessToken } = useAuthStore();
+            if ([401, 403, 400].includes(response.status) && !accessToken) {
                 login();
             }
             const error = (data && data.message) || response.statusText;

@@ -1,13 +1,15 @@
 import { defineStore } from 'pinia';
 import { fetchWrapper, router } from '@/helper';
 import { useLocalStorage } from "@vueuse/core"
+import { useProfileStore } from "@/store"
 
 const baseUrl = "http://localhost:5000"
 
 export const useAuthStore = defineStore({
     id: 'auth',
     state: () => ({
-        auth: null,
+        accessToken: useLocalStorage('accessToken', ""),
+        refreshToken: useLocalStorage('refreshToken', ""),
         codeChallenge: useLocalStorage('codeChallenge', ""),
         codeVerifier: useLocalStorage('codeVerifier', ""),
     }),
@@ -23,11 +25,9 @@ export const useAuthStore = defineStore({
             })
         },
         async logout() {
-            fetchWrapper.post(`${baseUrl}/logout`, {}, {refresh_token: this.auth.refreshToken}).then(() => {
-                this.auth = null;
-                this.codeChallenge = "";
-                this.codeVerifier = "";
-                router.push('/')
+            fetchWrapper.post(`${baseUrl}/logout`, {}, {refresh_token: this.refreshToken}).then(() => {
+                localStorage.clear()
+                router.push("/").then(() => window.location.reload())
             }).catch((error) => console.log(error));
         },
         async connect(code) {       
@@ -36,11 +36,13 @@ export const useAuthStore = defineStore({
                 code_verifier: this.codeVerifier,
             }).then((response) => {
                 const { access_token, refresh_token, _ } = response
-                this.auth = {
-                    accessToken: access_token,
-                    refreshToken: refresh_token
-                }
-                router.push("profile")
+                this.accessToken = access_token,
+                this.refreshToken = refresh_token
+
+                const profileStore = useProfileStore();
+                profileStore.getUserFromJWT(access_token)
+
+                router.push('/')
             }).catch((error) => {
                 console.log(error)
                 this.login()
