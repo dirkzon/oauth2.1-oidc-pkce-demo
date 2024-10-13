@@ -2,6 +2,11 @@
 
 This repository demonstrates the [OAuth 2.1 Authorization Framework](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-11) authorization Code Flow with [Proof Key for Code Exchange](https://datatracker.ietf.org/doc/html/rfc7636) (PKCE) and [OpenId Connect](openid.net) (OIDC) to obtain limited access to a protected resource. It includes a user agent, authorization server and client to securely authenticate users, and manage JWT access tokens signed with the EdDSA digital signature algorithm.
 
+## Features
+- Login with Keycloak.
+- Retrieving user info from Keycoak.
+- logout with Keycoak.
+
 ## Built with
 - **Client:** [Express.js](expressjs.com)
 - **User agent:** [Vue.js](vuejs.org) with [Vite](vite.dev) and [pinia](pinia.vuejs.org)
@@ -94,7 +99,7 @@ The authorization server authenticates the client when possible, validates the a
 
 ![authorization code flow step 4 & 5](./examples/AuthFlow_step4-5.drawio.png)
 
-### 6. User info retrieval (optional)
+### 6. User Info Retrieval (optional)
 Although not necessary for the authorization code flow, this step is included for completeness. Once authenticated, the user agent redirects to the 'profile' page, where a call is made to the client with the access token in the headers. The client then retrieves the user info from the resource server using the same token.
 
 ![user info retrieval](/examples/AuthFlow_step6.drawio.png)
