@@ -1,10 +1,10 @@
 # Oauth2.1 OIDC PKCE demo
 
-This repository demonstrates the [OAuth 2.1 Authorization Framework](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-11) authorization Code Flow with [Proof Key for Code Exchange](https://datatracker.ietf.org/doc/html/rfc7636) (PKCE) and [OpenId Connect](openid.net) (OIDC) to obtain limited access to a protected resource. It includes a user agent, authorization server and client to securely authenticate users, and manage JWT access tokens signed with the EdDSA digital signature algorithm.
+This repository demonstrates the [OAuth 2.1 Authorization Framework](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-11) authorization Code Flow with [OpenId Connect](openid.net) (OIDC) to obtain limited access to a protected resource. [Proof Key for Code Exchange](https://datatracker.ietf.org/doc/html/rfc7636) (PKCE) and the EdDSA digital signature algorithm provide an extra layer of security against authorization code interception attacks. Included are a user agent, authorization/resource server and client to securely authenticate users, and manage JWT access tokens.
 
 ## Features
 - Login with Keycloak.
-- Retrieving user info from Keycoak.
+- Extracting user info from JWT token.
 - logout with Keycoak.
 
 ## Built with
@@ -61,8 +61,6 @@ _A keycloak container should now be created in Docker Desktop. The [config file]
 ```
 
 5. navigate to [http://localhost:5173/](http://localhost:5173/)
-
-**TODO add user agent homepage image**
 
 ## How it works
 This repository demonstrates the [authorization code flow/grant type](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-11#name-authorization-code-grant) as described by the OAuth 2.1 Authorization Framework. 

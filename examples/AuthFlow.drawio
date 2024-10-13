@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:131.0) Gecko/20100101 Firefox/131.0" modified="2024-10-13T09:35:22.357Z" version="24.6.4" etag="NvKW-sXahVOaHyerAIxw" type="device">
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:131.0) Gecko/20100101 Firefox/131.0" modified="2024-10-13T13:31:13.451Z" version="24.6.4" etag="8CwwwFZNIaHLBc4XLaKK" type="device">
   <diagram name="Page-1" id="4U2lWu9b1NIufgimmCVh">
-    <mxGraphModel dx="454" dy="711" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="345" dy="652" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -37,7 +37,7 @@
             <mxPoint x="1579.38" y="240" as="sourcePoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="hHbTxy1jI1l-UyztQn6d-16" value="dispatch" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;entryX=0;entryY=0;entryDx=0;entryDy=5;" edge="1" target="hHbTxy1jI1l-UyztQn6d-15" parent="1">
+        <mxCell id="hHbTxy1jI1l-UyztQn6d-16" value="Login" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;entryX=0;entryY=0;entryDx=0;entryDy=5;" edge="1" target="hHbTxy1jI1l-UyztQn6d-15" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="940" y="255" as="sourcePoint" />
           </mxGeometry>
@@ -196,7 +196,7 @@
         <mxCell id="hHbTxy1jI1l-UyztQn6d-85" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
           <mxGeometry x="1415" y="620" width="10" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="hHbTxy1jI1l-UyztQn6d-90" value="&lt;div&gt;Generates Code&amp;nbsp;&lt;/div&gt;&lt;div&gt;from Code Challenge&lt;/div&gt;" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;entryX=1;entryY=0;entryDx=0;entryDy=5;entryPerimeter=0;exitX=1;exitY=1;exitDx=0;exitDy=-5;exitPerimeter=0;" edge="1" target="hHbTxy1jI1l-UyztQn6d-89" parent="1" source="hHbTxy1jI1l-UyztQn6d-85">
+        <mxCell id="hHbTxy1jI1l-UyztQn6d-90" value="&lt;div&gt;Generates Code&amp;nbsp;&lt;/div&gt;&lt;div&gt;from Code Challenge&lt;/div&gt;&amp;nbsp;with EdDSA" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;entryX=1;entryY=0;entryDx=0;entryDy=5;entryPerimeter=0;exitX=1;exitY=1;exitDx=0;exitDy=-5;exitPerimeter=0;" edge="1" target="hHbTxy1jI1l-UyztQn6d-89" parent="1" source="hHbTxy1jI1l-UyztQn6d-85">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1420" y="635" as="sourcePoint" />
             <Array as="points">
@@ -342,7 +342,7 @@
         <mxCell id="hHbTxy1jI1l-UyztQn6d-199" value="&lt;b style=&quot;font-size: 15px;&quot;&gt;1.&lt;br&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="880" y="120" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="hHbTxy1jI1l-UyztQn6d-200" value="&lt;b&gt;2 &amp;amp; 3.&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="hHbTxy1jI1l-UyztQn6d-200" value="&lt;b style=&quot;font-size: 12px;&quot;&gt;2. &amp;amp; 3.&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;" vertex="1" parent="1">
           <mxGeometry x="880" y="490" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="hHbTxy1jI1l-UyztQn6d-201" value="&lt;div&gt;Generate token&amp;nbsp;&lt;/div&gt;&lt;div&gt;and verify with&amp;nbsp;&lt;/div&gt;&lt;div&gt;code_verifier&lt;/div&gt;" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;exitX=1;exitY=1;exitDx=0;exitDy=-5;exitPerimeter=0;" edge="1" source="hHbTxy1jI1l-UyztQn6d-114" target="hHbTxy1jI1l-UyztQn6d-203" parent="1">
