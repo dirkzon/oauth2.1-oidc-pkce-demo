@@ -5,7 +5,8 @@ This repository demonstrates the [OAuth 2.1 Authorization Framework](https://dat
 ## Features
 - Login with Keycloak.
 - Extracting user info from JWT token.
-- logout with Keycoak.
+- Logout with Keycoak.
+- Refreshing access token.
 
 ## Built with
 - **Client:** [Express.js](expressjs.com)
