@@ -38,15 +38,21 @@ export const useAuthStore = defineStore({
                 const { access_token, refresh_token, _ } = response
                 this.accessToken = access_token,
                 this.refreshToken = refresh_token
-
                 const profileStore = useProfileStore();
-                profileStore.getUserFromJWT(access_token)
-
-                router.push('/')
+                profileStore.getUserFromJWT(access_token);
+                router.push('/');
             }).catch((error) => {
                 console.log(error)
-                this.login()
             }) 
+        },
+        refreshAccessToken() {
+            return fetchWrapper.post(`${baseUrl}/refresh`, {
+                refresh_token: this.refreshToken
+            }).then((response) => {
+                this.accessToken = response.access_token;
+                this.refreshToken = response.refresh_token;
+                return
+            });
         },
         generateCodeVerifier(length = 40) {
             const array = new Uint32Array(length);

@@ -1,15 +1,10 @@
 import axios from 'axios'
 
 export const getProfileFromToken = (token) => {
-    const userInfoEndpoint = `${process.env.KEYCLOAK_BASE_URL}/realms/${process.env.REALM}/protocol/openid-connect/userinfo`;
-    return axios.get(userInfoEndpoint, {
+    return axios.get(`${process.env.KEYCLOAK_BASE_URL}/realms/${process.env.REALM}/protocol/openid-connect/userinfo`, {
       headers: {
         Authorization: token,
       },
-    }).then((response) => {
-        return response.data;
-    }).catch((error) => {
-        throw new Error(error);
     });
 }
 

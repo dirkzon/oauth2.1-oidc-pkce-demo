@@ -22,7 +22,7 @@ function request(method) {
                 requestOptions.headers[key] = headers[key]
             }
         }
-        return fetch(url, requestOptions).then(handleResponse);
+        return fetch(url, requestOptions).then((response) => handleResponse(response, url, requestOptions));
     }
 }
 
@@ -36,17 +36,26 @@ function authHeader() {
     }
 }
 
-function handleResponse(response) {
-    return response.text().then(text => {
-        const data = text && JSON.parse(text);
-        if (!response.ok) {
-            const { login, accessToken } = useAuthStore();
-            if ([401, 403, 400].includes(response.status) && !accessToken) {
-                login();
-            }
-            const error = (data && data.message) || response.statusText;
-            return Promise.reject(error);
+function handleResponse(response, url, requestOptions) {
+    if (response.ok) {
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+            return response.json().then((json) => { 
+                return json;
+            });
         }
-        return data;
-    });
+    } else {
+        const { login, refreshAccessToken, accessToken } = useAuthStore();
+        if ([401].includes(response.status) && accessToken) {
+            refreshAccessToken().then(async () => {
+                return fetch(url, requestOptions).then((response) => handleResponse(response, url, requestOptions));
+            }).catch(() => {
+                login()
+            })
+        }
+        if ([403, 400, 401].includes(response.status) && !accessToken) {
+            login();
+        }
+        return Promise.reject(response.statusText);
+    }
 }
