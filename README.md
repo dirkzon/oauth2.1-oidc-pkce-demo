@@ -35,7 +35,7 @@ This project is built on [Node.Js](nodejs.org) with javascript. This sections ex
 ```sh
    docker-compose up --build
 ```
-*All services should now be running in Docker Desktop*
+*All services should now be running in Docker Desktop.*
 ![Containers in Docker Desktop](./examples/containers.PNG)
 
 
@@ -50,6 +50,9 @@ This project is built on [Node.Js](nodejs.org) with javascript. This sections ex
       - password: `password` 
 
 6. Stop the services.
+```
+   Ctrl + C
+```
 ```sh
    docker-compose down
 ```
