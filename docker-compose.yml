@@ -1,6 +1,33 @@
+version: '3.8'
+
 services:
-  keycloak:
+  user_agent:
+    build: 
+      context: ./user_agent
+      dockerfile: DOCKERFILE
+    ports:
+      - 5173:80
+    networks:
+      - local_network
+    container_name: user_agent
+    depends_on:
+      - client
+
+  client: 
+    build: 
+      context: ./client
+      dockerfile: DOCKERFILE
+    container_name: client
+    ports:
+      - 5000:5000
+    networks:
+      - local_network
+    depends_on:
+      - auth_server
+  
+  auth_server:
     image: quay.io/keycloak/keycloak:24.0
+    container_name: auth_server
     environment:
       KC_HOSTNAME: localhost
       KC_HOSTNAME_PORT: 7080
@@ -16,12 +43,13 @@ services:
       retries: 15
     command: ["start-dev", "--http-port", "7080", "--https-port", "7443", "--import-realm"]
     volumes:
-      - ./realm-config.json:/opt/keycloak/data/import/myrealm.json
+      - ./auth_server/realm-config.json:/opt/keycloak/data/import/myrealm.json
     ports:
       - "7080:7080"
       - "7443:7443"
     networks:
       - local_network
+
 networks:
   local_network:
     driver: bridge

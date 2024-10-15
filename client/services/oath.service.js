@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const generateAuthorizationUri = (code_challenge) => {
-    return `${process.env.KEYCLOAK_BASE_URL}/realms/${process.env.REALM}/protocol/openid-connect/auth?` +
+    return `http://localhost:7080/realms/${process.env.REALM}/protocol/openid-connect/auth?` +
         `client_id=${process.env.CLIENT_ID}&` +
         `response_type=code&` +
         `redirect_uri=${encodeURIComponent(process.env.REDIRECT_URI)}&` +

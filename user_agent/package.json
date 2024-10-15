@@ -11,12 +11,14 @@
   "dependencies": {
     "@vueuse/core": "^11.1.0",
     "axios": "^1.7.7",
+    "cors": "^2.8.5",
     "jwt-decode": "^4.0.0",
     "pinia": "^2.2.4",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@vitejs/plugin-vue": "^5.0.5",
     "vite": "^5.4.8"
   }

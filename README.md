@@ -26,50 +26,22 @@ This project is built on [Node.Js](nodejs.org) with javascript. This sections ex
    git clone https://github.com/dirkzon/oauth2.1-oidc-pkce-demo.git
 ```
 
-2. CD into the project folder.
+2. CD into the project directory.
 ```sh
    cd oauth2.1-oidc-pkce-demo
 ```
 
-3. Install client dependencies.
+3. Start up the services.
 ```sh
-    cd client
+   docker-compose up --build
 ```
-```sh
-    npm install
-```
+*All services should now be running in Docker Desktop*
+![Containers in Docker Desktop](./examples/containers.PNG)
 
-4. Start the client.
-```sh
-   npm start
-```
 
-5. Install user agent dependencies. *from the root directory, so first do `cd ../`*.
-```sh
-    cd user_agent
-```
-```sh
-    npm install
-```
+4. Navigate to [http://localhost:5173/](http://localhost:5173/).
 
-6. Start the user agent.
-```sh
-   npm start
-```
-
-7. Spin up the Keycloak auth server. *from the root directory, so first do `cd ../`*.
-```sh
-   cd auth_server
-```
-```sh
-   docker-compose up
-```
-_A keycloak container should now be created in Docker Desktop. The [config file](./auth_server/realm-config.json) populates this keycloak instance with a realm, client and users._
-!['docker desktop keycloak container'](./examples/keycloak_container.PNG)
-
-8. Navigate to [http://localhost:5173/](http://localhost:5173/).
-
-9. Login with one of the predefined users:
+5. Login with one of the predefined users:
    - **John Doe**
       - username: `johndoe`
       - password: `password` 
@@ -77,6 +49,10 @@ _A keycloak container should now be created in Docker Desktop. The [config file]
       - username: `janedoe`
       - password: `password` 
 
+6. Stop the services.
+```sh
+   docker-compose down
+```
 
 ## How it works
 This repository demonstrates the [authorization code flow/grant type](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-11#name-authorization-code-grant) as described by the OAuth 2.1 Authorization Framework. 
