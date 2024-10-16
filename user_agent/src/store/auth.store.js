@@ -3,8 +3,6 @@ import { fetchWrapper, router } from '@/helper';
 import { useLocalStorage } from "@vueuse/core"
 import { useProfileStore } from "@/store"
 
-const baseUrl = "http://localhost:5000"
-
 export const useAuthStore = defineStore({
     id: 'auth',
     state: () => ({
@@ -18,20 +16,20 @@ export const useAuthStore = defineStore({
             this.codeVerifier = this.generateCodeVerifier()
             this.generateCodeChallenge(this.codeVerifier).then((codeChallenge) => {
                 this.codeChallenge = codeChallenge
-                fetchWrapper.get(`${baseUrl}/login?code_challenge=${this.codeChallenge}`).then((response) => {
+                fetchWrapper.get(`${import.meta.env.VITE_CLIENT_BASE_URL}/login?code_challenge=${this.codeChallenge}`).then((response) => {
                     const loginUri = response.data;
                     window.location.href = loginUri;
                 }).catch((error) => console.log(error));
             })
         },
         async logout() {
-            fetchWrapper.post(`${baseUrl}/logout`, {}, {refresh_token: this.refreshToken}).then(() => {
+            fetchWrapper.post(`${import.meta.env.VITE_CLIENT_BASE_URL}/logout`, {}, {refresh_token: this.refreshToken}).then(() => {
                 localStorage.clear()
                 router.push("/").then(() => window.location.reload())
             }).catch((error) => console.log(error));
         },
         async connect(code) {       
-            fetchWrapper.post(`${baseUrl}/connect`, { 
+            fetchWrapper.post(`${import.meta.env.VITE_CLIENT_BASE_URL}/connect`, { 
                 code: code,
                 code_verifier: this.codeVerifier,
             }).then((response) => {
@@ -46,7 +44,7 @@ export const useAuthStore = defineStore({
             }) 
         },
         refreshAccessToken() {
-            return fetchWrapper.post(`${baseUrl}/refresh`, {
+            return fetchWrapper.post(`${import.meta.env.VITE_CLIENT_BASE_URL}/refresh`, {
                 refresh_token: this.refreshToken
             }).then((response) => {
                 this.accessToken = response.access_token;

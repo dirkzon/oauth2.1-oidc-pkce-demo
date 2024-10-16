@@ -5,6 +5,8 @@ services:
     build: 
       context: ./user_agent
       dockerfile: DOCKERFILE
+    environment:
+      VITE_CLIENT_BASE_URL: "http://localhost:5000"
     ports:
       - 5173:80
     networks:
@@ -17,6 +19,9 @@ services:
     build: 
       context: ./client
       dockerfile: DOCKERFILE
+    environment:
+      KEYCLOAK_BASE_URL: "http://auth_server:7080"
+      REDIRECT_URI: "http://localhost:5173/callback"
     container_name: client
     ports:
       - 5000:5000
