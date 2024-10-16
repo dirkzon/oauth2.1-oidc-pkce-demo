@@ -49,12 +49,13 @@ function handleResponse(response, url, requestOptions) {
         if ([403, 400, 401].includes(response.status) && !accessToken) {
             login();
         }
-        if ([403].includes(response.status) && accessToken) {
-            login();
-        }
-        if ([401].includes(response.status) && accessToken) {
+        if ([403, 400, 401].includes(response.status) && accessToken) {
             refreshAccessToken().then(async () => {
-                return fetch(url, requestOptions).then((response) => handleResponse(response, url, requestOptions));
+                const { accessToken } = useAuthStore();
+                requestOptions.headers.Authorization = `Bearer ${accessToken}`
+                
+                const response = await fetch(url, requestOptions);
+                return handleResponse(response, url, requestOptions);
             }).catch(() => {
                 login()
             })

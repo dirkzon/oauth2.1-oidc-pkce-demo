@@ -49,8 +49,10 @@ export const useAuthStore = defineStore({
             }).then((response) => {
                 this.accessToken = response.access_token;
                 this.refreshToken = response.refresh_token;
-                return
-            });
+                return;
+            }).catch((error) => {
+                console.log(error)
+            })
         },
         generateCodeVerifier(length = 40) {
             const array = new Uint32Array(length);
