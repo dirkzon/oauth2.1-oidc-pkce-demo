@@ -1,9 +1,9 @@
 <script setup>
-import { useAuthStore, useProfileStore } from '@/store';
-import { router } from '@/helper';
+import { useAuthStore, useProfileStore, useTravelStore } from '@/store';
 
 const authStore = useAuthStore();
 const profileStore = useProfileStore();
+const travelStore = useTravelStore();
 </script>
 
 <template>
@@ -16,5 +16,6 @@ const profileStore = useProfileStore();
         <p class="text"> id: {{ profileStore.id }}</p>
       </div>
       <button  class="btn" @click="authStore.logout()"> log out </button>
+      <button  class="btn" @click="travelStore.getUserTravel()"> test </button>
     </div>
 </template>

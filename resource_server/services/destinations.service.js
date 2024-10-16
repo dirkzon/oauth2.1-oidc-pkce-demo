@@ -32,7 +32,12 @@ const data = [
 ]
 
 export const getDestinationsByID = (id) => {
-    return data.find(userDestinations => userDestinations.id === id).destinations;
+    const destinations =  data.find(userDestinations => userDestinations.id === id);
+    if (!destinations) {
+        return []
+    } else {
+        return destinations.destinations;
+    }
 }
 
 export default {

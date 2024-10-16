@@ -1,2 +1,2 @@
 export * from './oath.service.js'
-export * from './profile.service.js'
+export * from './travel.service.js'

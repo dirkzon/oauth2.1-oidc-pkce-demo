@@ -46,15 +46,18 @@ function handleResponse(response, url, requestOptions) {
         }
     } else {
         const { login, refreshAccessToken, accessToken } = useAuthStore();
+        if ([403, 400, 401].includes(response.status) && !accessToken) {
+            login();
+        }
+        if ([403].includes(response.status) && accessToken) {
+            login();
+        }
         if ([401].includes(response.status) && accessToken) {
             refreshAccessToken().then(async () => {
                 return fetch(url, requestOptions).then((response) => handleResponse(response, url, requestOptions));
             }).catch(() => {
                 login()
             })
-        }
-        if ([403, 400, 401].includes(response.status) && !accessToken) {
-            login();
         }
         return Promise.reject(response.statusText);
     }

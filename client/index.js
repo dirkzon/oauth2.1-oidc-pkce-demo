@@ -2,7 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser'
 import authRoutes from './routers/auth.routes.js';
-import profileRoutes from './routers/profile.routes.js';
+import travelRoutes from './routers/travel.routes.js';
 import cors from 'cors';
 
 dotenv.config();
@@ -12,7 +12,7 @@ const PORT = 5000
 
 app.use(bodyParser.json());
 app.use(authRoutes)
-app.use(profileRoutes)
+app.use(travelRoutes)
 
 app.use(cors({
     origin: 'http://localhost:5173',
