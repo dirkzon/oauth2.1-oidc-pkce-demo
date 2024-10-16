@@ -1,0 +1,1 @@
+export * from "./destinations.routes.js"
