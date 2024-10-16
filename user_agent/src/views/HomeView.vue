@@ -14,7 +14,7 @@ async function login() {
 
 <template>
   <main>
-    <div class="content">
+    <div class="content" style="text-align: center;">
       <div>
         <h1 v-if="!authStore.accessToken" class="text">Welcome</h1>
         <h1 v-else class="text">Welcome {{ profileStore.name }}!</h1>

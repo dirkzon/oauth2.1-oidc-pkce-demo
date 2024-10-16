@@ -9,40 +9,61 @@ import { RouterView } from 'vue-router'
 </template>
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
-
-#app {
-  min-height: 100vh;
-  background-color: #f0f0f0;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .content {
-  text-align: center;
-  background-color: white;
+  max-width: fit-content;
+  margin: 20px auto;
   padding: 20px;
+  background-color: #ffffff;
   border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.text {
+.section-title {
   font-size: 24px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   color: #333;
+  border-bottom: 2px solid #FF6500;
+  padding-bottom: 5px;
+}
+
+.info {
+  margin-bottom: 20px;
+}
+
+.info-item {
+  font-size: 18px;
+  color: #555;
+}
+
+.info-item span {
+  font-weight: bold;
+  color: #333;
+}
+
+.travel-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.travel-table th, .travel-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.travel-table th {
+  background-color: #f9f9f9;
+  font-weight: bold;
+}
+
+.total-distance {
+  margin-bottom: 20px;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
 }
 
 .btn {
@@ -58,5 +79,10 @@ html, body {
 
 .btn:hover {
   background-color: #E85C0D;
+}
+
+table, th, td {
+  border:1px solid black;
+  width: 100%;
 }
 </style>
