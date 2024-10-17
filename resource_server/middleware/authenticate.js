@@ -7,6 +7,9 @@ export const fetchKeycloakJWKSet = () => {
     console.info("Fetching JWK set from Keycloak.")
     axios.get(`${process.env.KEYCLOAK_BASE_URL}/realms/${process.env.REALM}/protocol/openid-connect/certs`).then((response) => {
         JWKS = createLocalJWKSet(response.data);
+    }).catch((error) => {
+        console.log(error)
+        setTimeout(fetchKeycloakJWKSet, 15 * 1000)
     });
 }
 
@@ -15,7 +18,6 @@ export const authenticateJWT = async (req, res, next) => {
     if (authHeader) {
         const token = authHeader.split(' ')[1];
         try {
-            
             jwtVerify(token, JWKS).then((response) => {
                 req.user = response.payload;
                 next()
@@ -27,7 +29,6 @@ export const authenticateJWT = async (req, res, next) => {
             console.error(error)
             res.sendStatus(401)
         }
-
     } else {
         res.sendStatus(401);
     }

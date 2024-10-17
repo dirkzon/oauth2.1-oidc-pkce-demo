@@ -22,6 +22,7 @@ services:
     environment:
       KEYCLOAK_BASE_URL: "http://auth_server:7080"
       REDIRECT_URI: "http://localhost:5173/callback"
+      RESOURCE_SERVER_BASE_URL: "http://resource_server:4000"
     container_name: client
     ports:
       - 5000:5000
@@ -29,7 +30,22 @@ services:
       - local_network
     depends_on:
       - auth_server
-  
+      - resource_server
+
+  resource_server:
+    build:
+      context: ./resource_server
+      dockerfile: DOCKERFILE
+    environment:
+      KEYCLOAK_BASE_URL: "http://auth_server:7080"
+    container_name: resource_server
+    ports:
+      - 4000:4000
+    networks:
+      - local_network
+    depends_on:
+      - auth_server
+    
   auth_server:
     image: quay.io/keycloak/keycloak:24.0
     container_name: auth_server

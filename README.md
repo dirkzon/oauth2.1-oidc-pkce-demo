@@ -1,23 +1,24 @@
 # Oauth2.1 OIDC PKCE demo
 
-This repository demonstrates the [OAuth 2.1 Authorization Framework](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-11) authorization Code Flow with [OpenId Connect](openid.net) (OIDC) to obtain limited access to a protected resource. [Proof Key for Code Exchange](https://datatracker.ietf.org/doc/html/rfc7636) (PKCE) and the EdDSA digital signature algorithm provide an extra layer of security against authorization code interception attacks. Included are a user agent, authorization/resource server and client to securely authenticate users, and manage JWT access tokens.
+This repository demonstrates the [OAuth 2.1 Authorization Framework](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-11) authorization Code Flow with [OpenId Connect](openid.net) (OIDC) to obtain limited access to a protected resource. [Proof Key for Code Exchange](https://datatracker.ietf.org/doc/html/rfc7636) (PKCE) and the EdDSA digital signature algorithm provide an extra layer of security against authorization code interception attacks. Included are a user agent, authorization server, resource server and client to securely authenticate users, manage JWT access tokens and retrieve data from the protected resource server.
 
 ## Features
-- Login with Keycloak.
+- Login/Logout with Keycloak.
 - Extracting user info from JWT token.
-- Logout with Keycoak.
-- Refreshing access token.
+- Refreshing access token with refresh token.
+- Retrieving data from protected resource server.
+- Transforming retrieved data in client before serving to user agent.
 
 ## Built with
-- **Client:** [Express.js](expressjs.com)
+- **Client & resource server:** [Express.js](expressjs.com)
 - **User agent:** [Vue.js](vuejs.org) with [Vite](vite.dev) and [pinia](pinia.vuejs.org)
-- **Auth/resource server**: [Keycloak](keycloak.org)
+- **Auth**: [Keycloak](keycloak.org)
 
 ## Getting started
 This project is built on [Node.Js](nodejs.org) with javascript. This sections explains the steps to set this project up locally.
 
 ### Prerequisites
-- [npm](npmjs.com)
+<!-- - [npm](npmjs.com) -->
 - [Docker Desktop](docker.com/products/docker-desktop/)
 
 ### Installation
@@ -91,3 +92,10 @@ The client requests an access token from the authorization server's token endpoi
 The authorization server authenticates the client when possible, validates the authorization code, validates the code verifier, and ensures that the redirect URI received matches the URI used to redirect the client in step (3). If valid, the authorization server responds back with an access token and, optionally, a refresh token.
 
 ![authorization code flow step 4 & 5](./examples/AuthFlow_step4-5.drawio.png)
+
+### 6. Data Retrieval from Protected Resource (Optional)
+*This step is not part of the authorization code flow. But is shown for completeness.*
+
+At startup, the resource server retrieves public keys from the authorization server as JWKS, validating access tokens and updating the keys every hour. After authentication, the user navigates to the "profile" page, then the client requests travel data. The client retrieves destination data from the resource server, which validates the access token against the JWKS. If valid, the resource server returns the destinations to the client, which calculates the total distance and sends it back to the user agent.
+
+![data retreival from the protected resource server](./examples/AuthFlow_step-6.drawio.png)
