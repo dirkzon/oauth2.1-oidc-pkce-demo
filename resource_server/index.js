@@ -17,6 +17,6 @@ app.use(cors({
     credentials: true
 }));
 
-fetchKeycloakJWKSet()
-
 app.listen(PORT, () => console.log(`Server running on port: http://localhost:${PORT}`));
+
+fetchKeycloakJWKSet()
