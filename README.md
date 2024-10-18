@@ -10,16 +10,16 @@ This repository demonstrates the [OAuth 2.1 Authorization Framework](https://dat
 - Transforming retrieved data in client before serving to user agent.
 
 ## Built with
-- **Client & resource server:** [Express.js](expressjs.com)
-- **User agent:** [Vue.js](vuejs.org) with [Vite](vite.dev) and [pinia](pinia.vuejs.org)
-- **Auth**: [Keycloak](keycloak.org)
+- **Client & resource server:** [Express.js](https://expressjs.com)
+- **User agent:** [Vue.js](https://vuejs.org) with [Vite](https://vite.dev) and [pinia](https://pinia.vuejs.org)
+- **Auth**: [Keycloak](https://keycloak.org)
 
 ## Getting started
-This project is built on [Node.Js](nodejs.org) with javascript. This sections explains the steps to set this project up locally.
+This project is built on [Node.Js](https://nodejs.org) with javascript. This sections explains the steps to set this project up locally.
 
 ### Prerequisites
 <!-- - [npm](npmjs.com) -->
-- [Docker Desktop](docker.com/products/docker-desktop/)
+- [Docker Desktop](https://docker.com/products/docker-desktop/)
 
 ### Installation
 1. clone the repo.
