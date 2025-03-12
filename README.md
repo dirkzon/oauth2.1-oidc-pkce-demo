@@ -10,18 +10,17 @@ This repository demonstrates the [OAuth 2.1 Authorization Framework](https://dat
 - Transforming retrieved data in client before serving to user agent.
 
 ## Built with
+This demo is built on [Node.Js](https://nodejs.org) with javascript and the following packages and software:
 - **Client & resource server:** [Express.js](https://expressjs.com)
 - **User agent:** [Vue.js](https://vuejs.org) with [Vite](https://vite.dev) and [pinia](https://pinia.vuejs.org)
 - **Auth**: [Keycloak](https://keycloak.org)
 
 ## Getting started
-This project is built on [Node.Js](https://nodejs.org) with javascript. This sections explains the steps to set this project up locally.
 
 ### Prerequisites
-<!-- - [npm](npmjs.com) -->
-- [Docker Desktop](https://docker.com/products/docker-desktop/)
+- A running [Docker](https://www.docker.com/) instance.
 
-### Installation
+### Start the demo
 1. clone the repo.
 ```sh
    git clone https://github.com/dirkzon/oauth2.1-oidc-pkce-demo.git
@@ -39,7 +38,6 @@ This project is built on [Node.Js](https://nodejs.org) with javascript. This sec
 *All services should now be running in Docker Desktop.*
 ![Containers in Docker Desktop](./examples/containers.PNG)
 
-
 4. Navigate to [http://localhost:5173/](http://localhost:5173/).
 
 5. Login with one of the predefined users:
@@ -48,15 +46,25 @@ This project is built on [Node.Js](https://nodejs.org) with javascript. This sec
       - password: `password` 
    - **Jane Doe**
       - username: `janedoe`
-      - password: `password` 
+      - password: `password`
 
-6. Stop the services.
-```
-   Ctrl + C
-```
+*Once logged in, the user's information is displayed in the user agent.*
+![Profile information once logged in.](./examples/logged_in_ui.png)
+
+6. Log out using the "Log Out" buttin the UI.
+
+### Stop the demo
+Stop the services.
 ```sh
    docker-compose down
 ```
+
+## Keycloak UI
+1. Navitage to [http://localhost:7080](http://localhost:7080).
+
+2. Log in with this account:
+   - username: `admin`
+   - password: `admin`
 
 ## How it works
 This repository demonstrates the [authorization code flow/grant type](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-11#name-authorization-code-grant) as described by the OAuth 2.1 Authorization Framework. 
