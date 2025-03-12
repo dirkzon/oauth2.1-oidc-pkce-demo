@@ -23,6 +23,7 @@ services:
       KEYCLOAK_BASE_URL: "http://auth_server:7080"
       REDIRECT_URI: "http://localhost:5173/callback"
       RESOURCE_SERVER_BASE_URL: "http://resource_server:4000"
+      USER_AGENT_URL: "http://localhost:5173"
     container_name: client
     ports:
       - 5000:5000
