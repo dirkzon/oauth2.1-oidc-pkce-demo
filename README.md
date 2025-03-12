@@ -1,7 +1,7 @@
 # Oauth2.1 OIDC PKCE demo
 This repository demonstrates the [OAuth 2.1 Authorization Framework](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-11) authorization Code Flow with [OpenId Connect](openid.net) (OIDC) to obtain limited access to a protected resource. [Proof Key for Code Exchange](https://datatracker.ietf.org/doc/html/rfc7636) (PKCE) and the EdDSA digital signature algorithm provide an extra layer of security against authorization code interception attacks. Included are a user agent, authorization server, resource server and client to securely authenticate users, manage JWT access tokens and retrieve data from the protected resource server.
 
-In this demo travel locations, stored as longitude and lattitude, are reteived by the client from the resource server (protected resource). The client uses these coordinates to calculate the total distance travel by the user. Both the total distance and the coordinates are [displayed](#once-logged-in-the-users-information-is-displayed-in-the-user-agent) in the user agent.
+In this demo travel locations, stored as longitude and latitude, are reteived by the client from the resource server (protected resource). The client uses these coordinates to calculate the total distance travel by the user. Both the total distance and the coordinates are [displayed](#once-logged-in-the-users-information-is-displayed-in-the-user-agent) in the user agent.
 
 ## Features
 - Login/Logout with Keycloak.
