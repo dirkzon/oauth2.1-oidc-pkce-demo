@@ -1,6 +1,7 @@
 # Oauth2.1 OIDC PKCE demo
-
 This repository demonstrates the [OAuth 2.1 Authorization Framework](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-11) authorization Code Flow with [OpenId Connect](openid.net) (OIDC) to obtain limited access to a protected resource. [Proof Key for Code Exchange](https://datatracker.ietf.org/doc/html/rfc7636) (PKCE) and the EdDSA digital signature algorithm provide an extra layer of security against authorization code interception attacks. Included are a user agent, authorization server, resource server and client to securely authenticate users, manage JWT access tokens and retrieve data from the protected resource server.
+
+In this demo travel locations, stored as longitude and lattitude, are reteived by the client from the resource server (protected resource). The client uses these coordinates to calculate the total distance travel by the user. Both the total distance and the coordinates are [displayed](#once-logged-in-the-users-information-is-displayed-in-the-user-agent) in the user agent.
 
 ## Features
 - Login/Logout with Keycloak.
@@ -35,7 +36,7 @@ This demo is built on [Node.Js](https://nodejs.org) with javascript and the foll
 ```sh
    docker-compose up --build
 ```
-*All services should now be running in Docker Desktop.*
+#### *All services should now be running in Docker Desktop.*
 ![Containers in Docker Desktop](./examples/containers.PNG)
 
 4. Navigate to [http://localhost:5173/](http://localhost:5173/).
@@ -48,7 +49,7 @@ This demo is built on [Node.Js](https://nodejs.org) with javascript and the foll
       - username: `janedoe`
       - password: `password`
 
-*Once logged in, the user's information is displayed in the user agent.*
+#### *Once logged in, the user's information is displayed in the user agent.*
 ![Profile information once logged in.](./examples/logged_in_ui.png)
 
 6. Log out using the "Log Out" buttin the UI.
@@ -59,7 +60,7 @@ Stop the services.
    docker-compose down
 ```
 
-## Keycloak UI
+### Keycloak UI
 1. Navitage to [http://localhost:7080](http://localhost:7080).
 
 2. Log in with this account:
