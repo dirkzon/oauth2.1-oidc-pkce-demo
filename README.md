@@ -108,3 +108,6 @@ The authorization server authenticates the client when possible, validates the a
 At startup, the resource server retrieves public keys from the authorization server as JWKS, validating access tokens and updating the keys every hour. After authentication, the user navigates to the "profile" page, then the client requests travel data. The client retrieves destination data from the resource server, which validates the access token against the JWKS. If valid, the resource server returns the destinations to the client, which calculates the total distance and sends it back to the user agent.
 
 ![data retreival from the protected resource server](./examples/AuthFlow_step-6.drawio.png)
+
+# Licence
+[MIT](./LICENSE)
